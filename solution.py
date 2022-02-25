@@ -1,19 +1,17 @@
-from http import client
 from socket import *
-import smtplib
-import ssl
 
 def smtp_client(port=1025, mailserver='127.0.0.1'):
     msg = "\r\n My message"
     endmsg = "\r\n.\r\n"
 
     # Choose a mail server (e.g. Google mail server) if you want to verify the script beyond GradeScope
-    mailserver = ('smtp.gmail.com',465)
+    mailserver = 'localhost'
+    port = 1025
     # Create socket called clientSocket and establish a TCP connection with mailserver and port
 
     # Fill in start
     clientSocket = socket(AF_INET, SOCK_STREAM)
-    clientSocket.connect(mailserver)
+    clientSocket.connect((mailserver,port))
 
     # Fill in end
 
@@ -32,7 +30,7 @@ def smtp_client(port=1025, mailserver='127.0.0.1'):
 
     # Send MAIL FROM command and handle server response.
     # Fill in start
-    MAILFROMcommand = 'MAIL FROM: Test1\r\n'
+    MAILFROMcommand = 'MAIL FROM: <alice@crepes.edu>\r\n'
     clientSocket.send(MAILFROMcommand.encode())
     recv2 = clientSocket.recv(1024).decode()
     print(recv2)
@@ -42,7 +40,7 @@ def smtp_client(port=1025, mailserver='127.0.0.1'):
 
     # Send RCPT TO command and handle server response.
     # Fill in start
-    RCPTTOcommand = 'RCPT TO: Test2\r\n'
+    RCPTTOcommand = 'RCPT TO: <bob@hamburger.edu>\r\n'
     clientSocket.send(RCPTTOcommand.encode())
     recv3 = clientSocket.recv(1024).decode()
     print(recv3)
