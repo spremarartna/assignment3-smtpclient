@@ -1,5 +1,4 @@
-from socket import *
-from xmlrpc import client
+rom socket import *
 import socket
 
 
@@ -12,13 +11,11 @@ def smtp_client(port=1025, mailserver='127.0.0.1'):
     # Create socket called clientSocket and establish a TCP connection with mailserver and port
 
     # Fill in start
-    mailserver = "127.0.0.1"
+    mailserver = '127.0.0.1'
     port = 1025
-    #clientSocket = socket(AF_INET, SOCK_STREAM)
     clientSocket = socket.socket()
     clientSocket.connect((mailserver, port))
-    #clientSocket.listen(5)
-    #clientSocket.accept()
+ 
     # Fill in end
 
     recv = clientSocket.recv(1024).decode()
