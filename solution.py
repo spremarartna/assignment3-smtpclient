@@ -15,10 +15,8 @@ def smtp_client(port=1025, mailserver='127.0.0.1'):
     mailserver = '127.0.0.1'
     port = 1025
     clientSocket = socket.socket()
-    clientSocket.bind((mailserver, port))
-    clientSocket.listen(1)
-    clientSocket.accept()
-    #clientSocket.connect((mailserver, port))
+    clientSocket.connect((mailserver, port))
+    #clientSocket.bind((mailserver, port))
  
     # Fill in end
 
@@ -87,6 +85,7 @@ def smtp_client(port=1025, mailserver='127.0.0.1'):
    # print(recv6)
     if recv6[:3] != '221':
         print('221 reply not received from server.')
+    pass
     clientSocket.close()
     # Fill in end
 
