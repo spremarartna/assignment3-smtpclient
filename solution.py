@@ -1,5 +1,6 @@
 from socket import *
 from xmlrpc import client
+import socket
 
 
 def smtp_client(port=1025, mailserver='127.0.0.1'):
@@ -11,12 +12,13 @@ def smtp_client(port=1025, mailserver='127.0.0.1'):
     # Create socket called clientSocket and establish a TCP connection with mailserver and port
 
     # Fill in start
-    mailserver = 'localhost'
+    mailserver = "127.0.0.1"
     port = 1025
-    clientSocket = socket(AF_INET, SOCK_STREAM)
-    clientSocket.bind((mailsever, port))
-    clientSocket.listen(5)
-    clientSocket.accept()
+    #clientSocket = socket(AF_INET, SOCK_STREAM)
+    clientSocket = socket.socket()
+    clientSocket.connect((mailserver, port))
+    #clientSocket.listen(5)
+    #clientSocket.accept()
     # Fill in end
 
     recv = clientSocket.recv(1024).decode()
@@ -84,7 +86,7 @@ def smtp_client(port=1025, mailserver='127.0.0.1'):
     print(recv6)
     if recv6[:3] != '221':
         print('221 reply not received from server.')
-
+    clientSocket.close()
     # Fill in end
 
 if __name__ == '__main__':
