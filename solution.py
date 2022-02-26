@@ -1,17 +1,18 @@
+from http import client
 from socket import *
+
 
 def smtp_client(port=1025, mailserver='127.0.0.1'):
     msg = "\r\n My message"
     endmsg = "\r\n.\r\n"
 
     # Choose a mail server (e.g. Google mail server) if you want to verify the script beyond GradeScope
-
+    
     # Create socket called clientSocket and establish a TCP connection with mailserver and port
 
     # Fill in start
-    mailserver = ('127.0.0.1', 25)
     clientSocket = socket(AF_INET, SOCK_STREAM)
-    clientSocket.connect((mailserver))
+    clientSocket.connect(mailserver)
 
     # Fill in end
 
@@ -30,7 +31,7 @@ def smtp_client(port=1025, mailserver='127.0.0.1'):
 
     # Send MAIL FROM command and handle server response.
     # Fill in start
-    MAILFROMcommand = 'MAIL FROM: <alice@crepes.edu>\r\n'
+    MAILFROMcommand = 'MAIL FROM: <alice@crepes.fr>\r\n'
     clientSocket.send(MAILFROMcommand.encode())
     recv2 = clientSocket.recv(1024).decode()
     print(recv2)
@@ -65,10 +66,7 @@ def smtp_client(port=1025, mailserver='127.0.0.1'):
 
     # Message ends with a single period, send message end and handle server response.
     # Fill in start
-    clientSocket.send(endmsg)
-    if endmsg == '.':
-        clientSocket.send('\r\n.\r\n')
-    
+    clientSocket.send(endmsg.encode())
     recv5 = clientSocket.recv(1024).decode()
     print(recv5)
     if recv5[:3] != '250':
@@ -83,7 +81,6 @@ def smtp_client(port=1025, mailserver='127.0.0.1'):
     print(recv6)
     if recv6[:3] != '221':
         print('221 reply not received from server.')
-    clientSocket.close()
     # Fill in end
 
 
